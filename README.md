@@ -37,10 +37,10 @@ javascript:
 
 | Attribute        | default           | Description  |
 | :------------- |:-------------| :-----|
-| node      | null | 导航条根节点 *Required* |
-|navItemSelector | .J_Navigator | {Strubg}导航子节点选择器,必须指定为a标签，推荐href设定为#id的形式，兼容浏览器默认行为|
+| node      | null | {Selector|NodeList}导航条根节点 *Required* |
+|navItemSelector | .J_Navigator | {String}导航子节点选择器,必须指定为a标签，推荐href设定为#id的形式，兼容浏览器默认行为|
 |enableAutoSelect|true|启用逆向流程：用户滚动页面时，自动高亮选中当前页面的第一个模块对应的导航链接|
-|navSelectedClass|.selected|高亮导航节点样式|
+|navSelectedClass|.selected|{String}高亮导航节点样式|
 |interval|400|页面滚动时的监测的时间间隔，时间越短，性能越差|
 |threshold|0|设定一个阀值，DOM.scrollTop()大于这个值时显示导航条|
 
@@ -48,7 +48,24 @@ javascript:
 
 ## 事件
 
+
+| Event        | When           | Payload  |
+| :------------- |:-------------| :-----|
+| scrolling      | 点击导航页面开始滚动和结束滚动时触发 | e.scrolling:{Boolean} 为true时开始滚动 false时结束滚动 e.data能拿到当前的navigator对象|
+|afterVisibleChange|设定阀值后，显示隐藏导航节点时触发|e.newVal为true时表示显示|
+|afterAcitveNavigatorChange|新的导航节点激活（高亮）时触发|e.newVal为navigator对象|
+
+
 ## 方法
+
+
+| Method        | Description    | 
+| :------------- |:------------- |
+|setNavigatorsTop|如果导航的容器高度发生变化时，调用此方法重新计算容器高度|
+|region|获取节点的region对象|
+|viewportRegion|获取文档可视区域的region对象|
+
+
 ## changelog
 
 ### V1.0
