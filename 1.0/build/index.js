@@ -1,9 +1,15 @@
+/*
+combined files : 
+
+gallery/PageNavigator/1.0/index
+
+*/
 /**
  * @fileoverview 页面导航组件
  * @author PageNavigator<shuke.cl@taobao.com>
  * @module PageNavigator
  **/
-KISSY.add(function (S) {
+KISSY.add('gallery/PageNavigator/1.0/index',function (S) {
     var EMPTY = '';
     var $ = Node.all;
     var win = window;
@@ -403,6 +409,7 @@ KISSY.add(function (S) {
     });
     return PageNavigator;
 }, {requires: ['node' , 'dom', 'base' , 'anim' , 'ua']});
+
 
 
 
