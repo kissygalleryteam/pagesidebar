@@ -9,6 +9,12 @@
 * 支持自定义点击锚点后的滑动动画
 * 兼容浏览器默认行为
 
+截图:
+
+![alt text](http://img01.taobaocdn.com/tps/i1/T1DGpdFhBbXXcOg4z5-382-416.png "Logo Title Text 1")
+
+
+
 ## 快速上手
 
 
