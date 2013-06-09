@@ -5,7 +5,7 @@
 * demo：[http://gallery.kissyui.com/page-navigator/1.0/demo/index.html](http://gallery.kissyui.com/page-navigator/1.0/demo/index.html)
 
 ## 功能
-* 支持正向和逆向流程，可是区域内模块自动高亮
+* 支持正向和逆向流程，可视区域内模块自动高亮
 * 支持自定义点击锚点后的滑动动画
 * 兼容浏览器默认行为
 

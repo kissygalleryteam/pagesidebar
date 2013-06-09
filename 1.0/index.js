@@ -3,7 +3,7 @@
  * @author PageNavigator<shuke.cl@taobao.com>
  * @module PageNavigator
  **/
-KISSY.add(function (S) {
+KISSY.add(function (S , Node) {
     var EMPTY = '';
     var $ = Node.all;
     var win = window;
