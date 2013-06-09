@@ -1,0 +1,397 @@
+{
+    "project": {
+        "name": "PageNavigator",
+        "description": "",
+        "version": "1.0"
+    },
+    "files": {
+        "1.0/index.js": {
+            "name": "1.0/index.js",
+            "modules": {
+                "PageNavigator": 1
+            },
+            "classes": {
+                "PageNavigator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "PageNavigator": {
+            "name": "PageNavigator",
+            "submodules": {},
+            "classes": {
+                "PageNavigator": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "1.0/index.js",
+            "line": 12,
+            "fileoverview": "页面导航组件",
+            "author": "PageNavigator<shuke.cl@taobao.com>"
+        }
+    },
+    "classes": {
+        "PageNavigator": {
+            "name": "PageNavigator",
+            "shortname": "PageNavigator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "PageNavigator",
+            "namespace": "",
+            "file": "1.0/index.js",
+            "line": 12,
+            "description": "页面导航组件",
+            "is_constructor": 1,
+            "extends": "Base"
+        }
+    },
+    "classitems": [
+        {
+            "file": "1.0/index.js",
+            "line": 75,
+            "description": "通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高\n通过afterAcitveNavigatorChange可以监听到变化",
+            "access": "private",
+            "tagname": "",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 113,
+            "description": "获取指定DOM的region",
+            "itemtype": "method",
+            "name": "region",
+            "params": [
+                {
+                    "name": "node",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "Object"
+            },
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 132,
+            "description": "获取可视区域的region",
+            "itemtype": "method",
+            "name": "viewportRegion",
+            "return": {
+                "description": "Object"
+            },
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 151,
+            "description": "检测region1是否包含在region2里",
+            "params": [
+                {
+                    "name": "region1",
+                    "description": ""
+                },
+                {
+                    "name": "region2",
+                    "description": ""
+                },
+                {
+                    "name": "allInRegion",
+                    "description": "是否要完全包含",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "Boolean"
+            },
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 170,
+            "description": "获取两个region的相交region",
+            "params": [
+                {
+                    "name": "region1",
+                    "description": ""
+                },
+                {
+                    "name": "region2",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "}",
+                "type": "Left: number, top: number, right: number, bottom: number, width: number, height: number"
+            },
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 190,
+            "description": "重新获取每一个navigator的值，在window.scroll时需要根据这个值来监测当前处于最顶端的navigator\n当页面的模块高度发生变化时，建议重新调用此方法",
+            "itemtype": "method",
+            "name": "setNavigatorsTop",
+            "params": [
+                {
+                    "name": "navigators",
+                    "description": ""
+                }
+            ],
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 201,
+            "description": "滚动到指定navigator的位置",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 209,
+            "description": "滚动开始贺结束时改变其状态",
+            "itemtype": "event",
+            "name": "scrolling",
+            "params": [
+                {
+                    "name": "scrolling",
+                    "description": "滚动中",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 230,
+            "description": "分析html结构和配置转换为json\n注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置",
+            "params": [
+                {
+                    "name": "node",
+                    "description": ""
+                },
+                {
+                    "name": "selector",
+                    "description": ""
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 257,
+            "description": "获取指定节点的top值，如果传入数字，以此为准",
+            "params": [
+                {
+                    "name": "val",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 294,
+            "description": "导航容器的根节点",
+            "itemtype": "attribute",
+            "name": "node",
+            "type": "String|NodeList",
+            "default": "null",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 309,
+            "description": "导航子节点选择器,必须指定为a标签，推荐href设定为#id的形式，兼容浏览器默认行为",
+            "itemtype": "attribute",
+            "name": "navItemSelector",
+            "type": "String",
+            "default": ".J_Navigator",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 318,
+            "description": "启用逆向流程：用户滚动页面时，自动高亮选中当前页面的第一个模块对应的导航链接",
+            "itemtype": "attribute",
+            "name": "enableAutoSelect",
+            "type": "Boolean",
+            "default": "true",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 327,
+            "description": "高亮导航节点样式",
+            "itemtype": "attribute",
+            "name": "navSelectedClass",
+            "type": "String",
+            "default": "'selected'",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 336,
+            "description": "{\n                srcNode : null,\n                scrollTo : {\n                    to : null,\n                    threshold : 0\n                },\n                top: 200\n            }",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 349,
+            "description": "模块处于可视区域时出发的模块,通过e.newVal.scrollTo.to可以获取到进入显示区域的模块，e.newVal.srcNode表示当前的导航触发节点",
+            "itemtype": "event",
+            "name": "afterAcitveNavigatorChange",
+            "params": [
+                {
+                    "name": "navigator",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 357,
+            "description": "设定一个阀值，DOM.scrollTop()大于这个值时显示导航条",
+            "itemtype": "attribute",
+            "name": "threshold",
+            "type": "Number",
+            "default": "0",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 367,
+            "description": "导航条显示隐藏时触发",
+            "itemtype": "event",
+            "name": "afterVisibleChange",
+            "params": [
+                {
+                    "name": "e.newVal",
+                    "description": "e.prevVal",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 375,
+            "description": "页面滚动时的监测的时间间隔，时间越短，性能越差",
+            "itemtype": "attribute",
+            "name": "interval",
+            "type": "Number",
+            "default": "400",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 384,
+            "description": "滑动的duration,单位：ms 毫秒",
+            "itemtype": "attribute",
+            "name": "duration",
+            "type": "Number 毫秒",
+            "default": "800",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        },
+        {
+            "file": "1.0/index.js",
+            "line": 393,
+            "description": "滑动的缓冲效果",
+            "itemtype": "attribute",
+            "name": "easing",
+            "type": "String",
+            "default": "easeOut",
+            "class": "PageNavigator",
+            "module": "PageNavigator"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: fileoverview",
+            "line": " 1.0/index.js:1"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " 1.0/index.js:170"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " 1.0/index.js:257"
+        },
+        {
+            "message": "Missing item type\n通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高\n通过afterAcitveNavigatorChange可以监听到变化",
+            "line": " 1.0/index.js:75"
+        },
+        {
+            "message": "Missing item type\n检测region1是否包含在region2里",
+            "line": " 1.0/index.js:151"
+        },
+        {
+            "message": "Missing item type\n获取两个region的相交region",
+            "line": " 1.0/index.js:170"
+        },
+        {
+            "message": "Missing item type\n滚动到指定navigator的位置",
+            "line": " 1.0/index.js:201"
+        },
+        {
+            "message": "Missing item type\n分析html结构和配置转换为json\n注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置",
+            "line": " 1.0/index.js:230"
+        },
+        {
+            "message": "Missing item type\n获取指定节点的top值，如果传入数字，以此为准",
+            "line": " 1.0/index.js:257"
+        },
+        {
+            "message": "Missing item type\n{\n                srcNode : null,\n                scrollTo : {\n                    to : null,\n                    threshold : 0\n                },\n                top: 200\n            }",
+            "line": " 1.0/index.js:336"
+        }
+    ]
+}

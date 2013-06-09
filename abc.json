@@ -1,0 +1,13 @@
+{
+    "name": "PageNavigator",
+    "version": "1.0",
+    "desc": "带滑动效果的页内导航，回到顶部等功能。实现正向和逆向流程",
+    "cover": "",
+    "author": {
+        "name": "PageNavigator",
+        "email": "shuke.cl@taobao.com",
+        "page": "请修改作者个人首页"
+    },
+    "type": "kissy-pie",
+    "type-url": "http://abc.alibaba-inc.com/r/kissy-pie"
+}
