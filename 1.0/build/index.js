@@ -1,7 +1,7 @@
 /*
 combined files : 
 
-gallery/PageNavigator/1.0/index
+gallery/pagenavigator/1.0/index
 
 */
 /**
@@ -9,7 +9,7 @@ gallery/PageNavigator/1.0/index
  * @author PageNavigator<shuke.cl@taobao.com>
  * @module PageNavigator
  **/
-KISSY.add('gallery/PageNavigator/1.0/index',function (S) {
+KISSY.add('gallery/pagenavigator/1.0/index',function (S , Node) {
     var EMPTY = '';
     var $ = Node.all;
     var win = window;
@@ -29,7 +29,6 @@ KISSY.add('gallery/PageNavigator/1.0/index',function (S) {
     }
 
     S.extend(PageNavigator, S.Base, /** @lends PageNavigator.prototype*/{
-        scrollNode : S.all('html , body'),
         initializer : function () {
             this.node = this.get('node');
             if (!this.node) {
