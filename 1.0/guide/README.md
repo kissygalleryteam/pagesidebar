@@ -1,7 +1,7 @@
 ## PageNavigator
 
 * 版本：1.0
-* Docs：[http://gallery.kissyui.com/page-navigator/1.0/guide/main.html](http://gallery.kissyui.com/page-navigator/1.0/guide/index.html)
+* Docs：[http://gallery.kissyui.com/page-navigator/1.0/guide/main.html](http://gallery.kissyui.com/page-navigator/1.0/guide/main.html)
 * demo：[http://gallery.kissyui.com/page-navigator/1.0/demo/index.html](http://gallery.kissyui.com/page-navigator/1.0/demo/index.html)
 
 ## 功能
