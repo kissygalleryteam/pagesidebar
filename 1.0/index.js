@@ -23,7 +23,6 @@ KISSY.add(function (S , Node) {
     }
 
     S.extend(PageNavigator, S.Base, /** @lends PageNavigator.prototype*/{
-        scrollNode : S.all('html , body'),
         initializer : function () {
             this.node = this.get('node');
             if (!this.node) {
