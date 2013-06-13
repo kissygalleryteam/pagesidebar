@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>1.0/index.js - pagenavigator</title>
+    <title>1.0/index.js - pagesidebar</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,7 +15,7 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../assets/css/logo.png" title="pagenavigator"></h1>
+                <h1><img src="../assets/css/logo.png" title="pagesidebar"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
@@ -43,11 +43,15 @@
             
                 <li><a href="../classes/PageNavigator.html">PageNavigator</a></li>
             
+                <li><a href="../classes/PageSidebar.html">PageSidebar</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
             
                 <li><a href="../modules/PageNavigator.html">PageNavigator</a></li>
+            
+                <li><a href="../modules/PageSidebar.html">PageSidebar</a></li>
             
             </ul>
         </div>
@@ -90,8 +94,8 @@
     <pre class="code prettyprint linenums">
 /**
  * @fileoverview 页面导航组件
- * @author PageNavigator&lt;shuke.cl@taobao.com&gt;
- * @module PageNavigator
+ * @author PageSidebar&lt;shuke.cl@taobao.com&gt;
+ * @module PageSidebar
  **/
 KISSY.add(function (S , Node) {
     var EMPTY = &#x27;&#x27;;
@@ -101,18 +105,18 @@ KISSY.add(function (S , Node) {
     var isIE6 = S.UA.ie === 6;
     /**
      * 页面导航组件
-     * @class PageNavigator
+     * @class PageSidebar
      * @constructor
      * @extends Base
      */
-    function PageNavigator(comConfig) {
+    function PageSidebar(comConfig) {
         var self = this;
         //调用父类构造函数
-        PageNavigator.superclass.constructor.call(self, comConfig);
+        PageSidebar.superclass.constructor.call(self, comConfig);
         this.initializer();
     }
 
-    S.extend(PageNavigator, S.Base, /** @lends PageNavigator.prototype*/{
+    S.extend(PageSidebar, S.Base, /** @lends PageSidebar.prototype*/{
         initializer : function () {
             this.node = this.get(&#x27;node&#x27;);
             if (!this.node) {
@@ -378,7 +382,7 @@ KISSY.add(function (S , Node) {
             return 0;
         }
     }, {
-        ATTRS: /** @lends PageNavigator*/{
+        ATTRS: /** @lends PageSidebar*/{
             /**
              * 导航容器的根节点
              * @attribute node
@@ -401,7 +405,7 @@ KISSY.add(function (S , Node) {
              * @default .J_Navigator
              **/
             navItemSelector : {
-                value : &#x27;.J_PageNavigator&#x27;
+                value : &#x27;.J_PageSidebar&#x27;
             },
             /**
              * 启用逆向流程：用户滚动页面时，自动高亮选中当前页面的第一个模块对应的导航链接
@@ -490,7 +494,7 @@ KISSY.add(function (S , Node) {
 
         }
     });
-    return PageNavigator;
+    return PageSidebar;
 }, {requires: [&#x27;node&#x27; , &#x27;dom&#x27;, &#x27;base&#x27; , &#x27;anim&#x27; , &#x27;ua&#x27;]});
 
 

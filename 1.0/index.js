@@ -1,7 +1,7 @@
 /**
  * @fileoverview 页面导航组件
- * @author PageNavigator<shuke.cl@taobao.com>
- * @module PageNavigator
+ * @author PageSidebar<shuke.cl@taobao.com>
+ * @module PageSidebar
  **/
 KISSY.add(function (S , Node) {
     var EMPTY = '';
@@ -11,18 +11,18 @@ KISSY.add(function (S , Node) {
     var isIE6 = S.UA.ie === 6;
     /**
      * 页面导航组件
-     * @class PageNavigator
+     * @class PageSidebar
      * @constructor
      * @extends Base
      */
-    function PageNavigator(comConfig) {
+    function PageSidebar(comConfig) {
         var self = this;
         //调用父类构造函数
-        PageNavigator.superclass.constructor.call(self, comConfig);
+        PageSidebar.superclass.constructor.call(self, comConfig);
         this.initializer();
     }
 
-    S.extend(PageNavigator, S.Base, /** @lends PageNavigator.prototype*/{
+    S.extend(PageSidebar, S.Base, /** @lends PageSidebar.prototype*/{
         initializer : function () {
             this.node = this.get('node');
             if (!this.node) {
@@ -288,7 +288,7 @@ KISSY.add(function (S , Node) {
             return 0;
         }
     }, {
-        ATTRS: /** @lends PageNavigator*/{
+        ATTRS: /** @lends PageSidebar*/{
             /**
              * 导航容器的根节点
              * @attribute node
@@ -311,7 +311,7 @@ KISSY.add(function (S , Node) {
              * @default .J_Navigator
              **/
             navItemSelector : {
-                value : '.J_PageNavigator'
+                value : '.J_PageSidebar'
             },
             /**
              * 启用逆向流程：用户滚动页面时，自动高亮选中当前页面的第一个模块对应的导航链接
@@ -400,7 +400,7 @@ KISSY.add(function (S , Node) {
 
         }
     });
-    return PageNavigator;
+    return PageSidebar;
 }, {requires: ['node' , 'dom', 'base' , 'anim' , 'ua']});
 
 

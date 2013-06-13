@@ -1,6 +1,6 @@
 {
     "project": {
-        "name": "pagenavigator",
+        "name": "pagesidebar",
         "description": "",
         "version": "1.0"
     },
@@ -10,15 +10,19 @@
             "modules": {
                 "PageNavigator": 1
             },
-            "classes": {},
+            "classes": {
+                "PageNavigator": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "1.0/index.js": {
             "name": "1.0/index.js",
-            "modules": {},
+            "modules": {
+                "PageSidebar": 1
+            },
             "classes": {
-                "PageNavigator": 1
+                "PageSidebar": 1
             },
             "fors": {},
             "namespaces": {}
@@ -34,10 +38,24 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
+            "file": "1.0/build/index.js",
+            "line": 18,
+            "fileoverview": "页面导航组件",
+            "author": "PageNavigator<shuke.cl@taobao.com>"
+        },
+        "PageSidebar": {
+            "name": "PageSidebar",
+            "submodules": {},
+            "classes": {
+                "PageSidebar": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
             "file": "1.0/index.js",
             "line": 12,
             "fileoverview": "页面导航组件",
-            "author": "PageNavigator<shuke.cl@taobao.com>"
+            "author": "PageSidebar<shuke.cl@taobao.com>"
         }
     },
     "classes": {
@@ -51,6 +69,22 @@
             "extension_for": [],
             "module": "PageNavigator",
             "namespace": "",
+            "file": "1.0/build/index.js",
+            "line": 18,
+            "description": "页面导航组件",
+            "is_constructor": 1,
+            "extends": "Base"
+        },
+        "PageSidebar": {
+            "name": "PageSidebar",
+            "shortname": "PageSidebar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "PageSidebar",
+            "namespace": "",
             "file": "1.0/index.js",
             "line": 12,
             "description": "页面导航组件",
@@ -61,7 +95,7 @@
     "classitems": [
         {
             "file": "1.0/build/index.js",
-            "line": 81,
+            "line": 80,
             "description": "通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高\n通过afterAcitveNavigatorChange可以监听到变化",
             "access": "private",
             "tagname": "",
@@ -70,7 +104,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 119,
+            "line": 118,
             "description": "获取指定DOM的region",
             "itemtype": "method",
             "name": "region",
@@ -88,7 +122,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 138,
+            "line": 137,
             "description": "获取可视区域的region",
             "itemtype": "method",
             "name": "viewportRegion",
@@ -100,7 +134,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 157,
+            "line": 156,
             "description": "检测region1是否包含在region2里",
             "params": [
                 {
@@ -125,7 +159,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 176,
+            "line": 175,
             "description": "获取两个region的相交region",
             "params": [
                 {
@@ -146,7 +180,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 196,
+            "line": 195,
             "description": "重新获取每一个navigator的值，在window.scroll时需要根据这个值来监测当前处于最顶端的navigator\n当页面的模块高度发生变化时，建议重新调用此方法",
             "itemtype": "method",
             "name": "setNavigatorsTop",
@@ -161,7 +195,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 207,
+            "line": 206,
             "description": "滚动到指定navigator的位置",
             "params": [
                 {
@@ -174,7 +208,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 214,
+            "line": 213,
             "description": "滚动开始贺结束时改变其状态",
             "itemtype": "event",
             "name": "scrolling",
@@ -195,7 +229,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 235,
+            "line": 234,
             "description": "分析html结构和配置转换为json\n注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置",
             "params": [
                 {
@@ -214,7 +248,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 262,
+            "line": 261,
             "description": "获取指定节点的top值，如果传入数字，以此为准",
             "params": [
                 {
@@ -233,7 +267,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 299,
+            "line": 298,
             "description": "导航容器的根节点",
             "itemtype": "attribute",
             "name": "node",
@@ -244,7 +278,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 314,
+            "line": 313,
             "description": "导航子节点选择器,必须指定为a标签，推荐href设定为#id的形式，兼容浏览器默认行为",
             "itemtype": "attribute",
             "name": "navItemSelector",
@@ -255,7 +289,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 323,
+            "line": 322,
             "description": "启用逆向流程：用户滚动页面时，自动高亮选中当前页面的第一个模块对应的导航链接",
             "itemtype": "attribute",
             "name": "enableAutoSelect",
@@ -266,7 +300,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 332,
+            "line": 331,
             "description": "高亮导航节点样式",
             "itemtype": "attribute",
             "name": "navSelectedClass",
@@ -277,14 +311,14 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 341,
+            "line": 340,
             "description": "{\n                srcNode : null,\n                scrollTo : {\n                    to : null,\n                    threshold : 0\n                },\n                top: 200\n            }",
             "class": "PageNavigator",
             "module": "PageNavigator"
         },
         {
             "file": "1.0/build/index.js",
-            "line": 354,
+            "line": 353,
             "description": "模块处于可视区域时出发的模块,通过e.newVal.scrollTo.to可以获取到进入显示区域的模块，e.newVal.srcNode表示当前的导航触发节点",
             "itemtype": "event",
             "name": "afterAcitveNavigatorChange",
@@ -300,7 +334,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 362,
+            "line": 361,
             "description": "设定一个阀值，DOM.scrollTop()大于这个值时显示导航条",
             "itemtype": "attribute",
             "name": "threshold",
@@ -311,7 +345,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 372,
+            "line": 371,
             "description": "导航条显示隐藏时触发",
             "itemtype": "event",
             "name": "afterVisibleChange",
@@ -327,7 +361,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 380,
+            "line": 379,
             "description": "页面滚动时的监测的时间间隔，时间越短，性能越差",
             "itemtype": "attribute",
             "name": "interval",
@@ -338,7 +372,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 389,
+            "line": 388,
             "description": "滑动的duration,单位：ms 毫秒",
             "itemtype": "attribute",
             "name": "duration",
@@ -349,7 +383,7 @@
         },
         {
             "file": "1.0/build/index.js",
-            "line": 398,
+            "line": 397,
             "description": "滑动的缓冲效果",
             "itemtype": "attribute",
             "name": "easing",
@@ -364,8 +398,8 @@
             "description": "通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高\n通过afterAcitveNavigatorChange可以监听到变化",
             "access": "private",
             "tagname": "",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -382,8 +416,8 @@
             "return": {
                 "description": "Object"
             },
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -394,8 +428,8 @@
             "return": {
                 "description": "Object"
             },
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -419,8 +453,8 @@
             "return": {
                 "description": "Boolean"
             },
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -440,8 +474,8 @@
                 "description": "}",
                 "type": "Left: number, top: number, right: number, bottom: number, width: number, height: number"
             },
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -455,8 +489,8 @@
                     "description": ""
                 }
             ],
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -468,8 +502,8 @@
                     "description": ""
                 }
             ],
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -489,8 +523,8 @@
                     "type": "Object"
                 }
             ],
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -508,8 +542,8 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -527,8 +561,8 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -538,8 +572,8 @@
             "name": "node",
             "type": "String|NodeList",
             "default": "null",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -549,8 +583,8 @@
             "name": "navItemSelector",
             "type": "String",
             "default": ".J_Navigator",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -560,8 +594,8 @@
             "name": "enableAutoSelect",
             "type": "Boolean",
             "default": "true",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -571,15 +605,15 @@
             "name": "navSelectedClass",
             "type": "String",
             "default": "'selected'",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
             "line": 334,
             "description": "{\n                srcNode : null,\n                scrollTo : {\n                    to : null,\n                    threshold : 0\n                },\n                top: 200\n            }",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -594,8 +628,8 @@
                     "type": "Object"
                 }
             ],
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -605,8 +639,8 @@
             "name": "threshold",
             "type": "Number",
             "default": "0",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -621,8 +655,8 @@
                     "type": "Boolean"
                 }
             ],
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -632,8 +666,8 @@
             "name": "interval",
             "type": "Number",
             "default": "400",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -643,8 +677,8 @@
             "name": "duration",
             "type": "Number 毫秒",
             "default": "800",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         },
         {
             "file": "1.0/index.js",
@@ -654,8 +688,8 @@
             "name": "easing",
             "type": "String",
             "default": "easeOut",
-            "class": "PageNavigator",
-            "module": "PageNavigator"
+            "class": "PageSidebar",
+            "module": "PageSidebar"
         }
     ],
     "warnings": [
@@ -665,11 +699,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:176"
+            "line": " 1.0/build/index.js:175"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " 1.0/build/index.js:262"
+            "line": " 1.0/build/index.js:261"
         },
         {
             "message": "unknown tag: fileoverview",
@@ -685,31 +719,31 @@
         },
         {
             "message": "Missing item type\n通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高\n通过afterAcitveNavigatorChange可以监听到变化",
-            "line": " 1.0/build/index.js:81"
+            "line": " 1.0/build/index.js:80"
         },
         {
             "message": "Missing item type\n检测region1是否包含在region2里",
-            "line": " 1.0/build/index.js:157"
+            "line": " 1.0/build/index.js:156"
         },
         {
             "message": "Missing item type\n获取两个region的相交region",
-            "line": " 1.0/build/index.js:176"
+            "line": " 1.0/build/index.js:175"
         },
         {
             "message": "Missing item type\n滚动到指定navigator的位置",
-            "line": " 1.0/build/index.js:207"
+            "line": " 1.0/build/index.js:206"
         },
         {
             "message": "Missing item type\n分析html结构和配置转换为json\n注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置",
-            "line": " 1.0/build/index.js:235"
+            "line": " 1.0/build/index.js:234"
         },
         {
             "message": "Missing item type\n获取指定节点的top值，如果传入数字，以此为准",
-            "line": " 1.0/build/index.js:262"
+            "line": " 1.0/build/index.js:261"
         },
         {
             "message": "Missing item type\n{\n                srcNode : null,\n                scrollTo : {\n                    to : null,\n                    threshold : 0\n                },\n                top: 200\n            }",
-            "line": " 1.0/build/index.js:341"
+            "line": " 1.0/build/index.js:340"
         },
         {
             "message": "Missing item type\n通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高\n通过afterAcitveNavigatorChange可以监听到变化",
