@@ -1,4 +1,4 @@
-## PageNavigator
+## PageSidebar
 
 * 版本：1.0
 * 教程：[http://gallery.kissyui.com/pagesidebar/1.0/guide/main.html](http://gallery.kissyui.com/pagesidebar/1.0/guide/main.html)
