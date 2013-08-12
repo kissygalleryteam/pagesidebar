@@ -1,8 +1,8 @@
-## PageNavigator
+## PageSidebar
 
 * 版本：1.0
-* Docs：[http://gallery.kissyui.com/page-navigator/1.0/guide/main.html](http://gallery.kissyui.com/page-navigator/1.0/guide/main.html)
-* demo：[http://gallery.kissyui.com/page-navigator/1.0/demo/index.html](http://gallery.kissyui.com/page-navigator/1.0/demo/index.html)
+* Docs：[http://gallery.kissyui.com/pagesidebar/1.0/guide/main.html](http://gallery.kissyui.com/pagesidebar/1.0/guide/main.html)
+* demo：[http://gallery.kissyui.com/pagesidebar/1.0/demo/index.html](http://gallery.kissyui.com/pagesidebar/1.0/demo/index.html)
 
 ## 功能
 * 支持正向和逆向流程，可视区域内模块自动高亮
