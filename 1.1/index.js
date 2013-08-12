@@ -69,7 +69,9 @@ KISSY.add(function (S , Node) {
             }
             this.get('enableAutoSelect') && this._checkRegion();
 
-            isIE6 && (this.node[0].className = this.node[0].className);
+            if(isIE6){
+                this.node[0].className = this.node[0].className
+            };
         },
         /**
          * 通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高
@@ -78,10 +80,7 @@ KISSY.add(function (S , Node) {
          */
         _checkRegion : function (){
             var navigators = this.get('navigators');
-
             var viewportRegion = PageSidebar.viewportRegion();
-
-            //this.set('acitveNavigator' , null);
             var inRegionNavigators = [];
             var activeNavigator = null;
             for(var i = 0 ,len  = navigators.length ; i < len; i ++){
