@@ -55,7 +55,7 @@ module.exports = function(grunt) {
                 version    : '<%= pkg.version %>',
                 options    : {
                     paths : '<%= pkg.version %>/',
-                    outdir: '<%= pkg.version %>/guide/'
+                    outdir: '<%= pkg.version %>/guide/docs/'
                 }
             }
         }

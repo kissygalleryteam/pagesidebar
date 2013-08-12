@@ -238,6 +238,11 @@ KISSY.add(function (S , Node) {
                 var customCfg =_item.attr('data-navigator') ;
                 var _navigator = {};
                 var _toNode = S.one(_item.attr('href'));
+                if (_item.hasAttr('data-navigator')) {
+                    customCfg =_item.attr('data-navigator');
+                }else{
+                    customCfg ={};
+                }
                 customCfg = S.JSON.parse(customCfg) || {};
 
                 S.log(customCfg);
