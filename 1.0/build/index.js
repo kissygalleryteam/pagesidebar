@@ -241,17 +241,17 @@ KISSY.add('gallery/pagesidebar/1.0/index',function (S , Node) {
         _parseHtmlToNavigators : function (node, selector){
             var navigators = [];
             node.all(selector).each(function (_item){
-                var customCfg =_item.attr('data-navigator') ;
+                var customCfg ;
                 var _navigator = {};
                 var _href = /#[\d\D]*/gi.exec(_item.attr('href'));
                 var _toNode = (_href.length > 0 && S.one(_href[0])) || null;
                 if (_item.hasAttr('data-navigator')) {
-                    customCfg =_item.attr('data-navigator');
+                    try{
+                        customCfg =S.JSON.parse(_item.attr('data-navigator'));
+                    }catch(e){ customCfg ={};}
                 }else{
                     customCfg ={};
                 }
-                customCfg = S.JSON.parse(customCfg) || {};
-
                 S.log(customCfg);
                 customCfg = S.mix({threshold:0 , to : 0} , customCfg , undefined, undefined , true);
                 _toNode && (customCfg.to = _toNode);
