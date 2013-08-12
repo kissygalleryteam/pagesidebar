@@ -79,7 +79,7 @@ KISSY.add(function (S , Node) {
         _checkRegion : function (){
             var navigators = this.get('navigators');
 
-            var viewportRegion = this.viewportRegion();
+            var viewportRegion = PageSidebar.viewportRegion();
 
             //this.set('acitveNavigator' , null);
             var inRegionNavigators = [];
@@ -87,9 +87,9 @@ KISSY.add(function (S , Node) {
             for(var i = 0 ,len  = navigators.length ; i < len; i ++){
                 var toNode = navigators[i].scrollTo.to;
                 if ((toNode instanceof S.NodeList)) {
-                    toNode.data('region' , this.region(toNode));
-                    if (this.inRegion( toNode.data('region') , viewportRegion)) {
-                        navigators[i].intersectRegion = this.intersect(toNode.data('region') , viewportRegion);
+                    toNode.data('region' , PageSidebar.region(toNode));
+                    if (PageSidebar.inRegion( toNode.data('region') , viewportRegion)) {
+                        navigators[i].intersectRegion = PageSidebar.intersect(toNode.data('region') , viewportRegion);
                         inRegionNavigators.push(navigators[i]);
                     }
                 }
@@ -109,6 +109,114 @@ KISSY.add(function (S , Node) {
                 this.set('activeNavigator' , activeNavigator);
             }
         },
+        /**
+         * 重新获取每一个navigator的值，在window.scroll时需要根据这个值来监测当前处于最顶端的navigator
+         * 当页面的模块高度发生变化时，建议重新调用此方法
+         * @method setNavigatorsTop
+         * @param navigators
+         */
+        setNavigatorsTop : function (navigators){
+            S.each(navigators , function (navigator){
+                navigator.top = this._getTop(navigator.scrollTo.to) + (navigator.scrollTo.threshold);
+            } , this);
+        },
+        /**
+         * 滚动到指定navigator的位置
+         * @param item
+         */
+        scrollTo    : function (item) {
+            var that = this;
+            $(win).stop();
+            /**
+             * 滚动开始贺结束时改变其状态
+             * @event scrolling
+             * @param {Boolean} scrolling 滚动中
+             * @param {Object} data
+             **/
+            this.fire('scrolling' , {
+                scrolling : true,
+                data : item
+            });
+            var toTop =  this._getTop(item.scrollTo.to) + (item.scrollTo.threshold);
+            item.top = toTop ;
+            $(win).animate({
+                scrollTop: toTop
+            }, this.get('duration') / 1000, this.get('easing'),function (){
+                that.fire('scrolling' , {
+                    scrolling : false,
+                    data : item
+                });
+            });
+        },
+        /**
+         * 分析html结构和配置转换为json
+         * 注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置
+         * @param node
+         * @param selector
+         * @private
+         */
+        _parseHtmlToNavigators : function (node, selector){
+            var navigators = [];
+            node.all(selector).each(function (_item){
+                var customCfg ;
+                var _navigator = {};
+                var _href = /#[\d\D]+/gi.exec(_item.attr('href'));
+                var _toNode = S.one(_item.attr('href'));
+                if (_item.hasAttr('data-navigator')) {
+                    try{
+                        customCfg =S.JSON.parse(_item.attr('data-navigator'));
+                    }catch(e){ customCfg ={};}
+                }else{
+                    customCfg ={};
+                }
+                S.log(customCfg);
+                customCfg = S.mix({threshold:0 , to : 0} , customCfg , undefined, undefined , true);
+                _toNode && (customCfg.to = _toNode);
+                _navigator =  {
+                    srcNode : _item,
+                    scrollTo: customCfg
+                };
+                navigators.push(_navigator);
+                _item.data('navigator' , _navigator);
+            });
+            this.set('navigators', this.get('navigators').concat(navigators));
+        },
+        /**
+         * 获取指定节点的top值，如果传入数字，以此为准
+         * @param val
+         * @returns {*}
+         * @private
+         */
+        _getTop     : function (val) {
+            switch (true) {
+                case S.isNumber(val) :
+                    return val;
+                    break;
+                case S.isString(val) :
+                    var _node = S.one(val);
+                    if (_node) {
+                        return _node.offset().top
+                    } else {
+                        S.log('没有找到对应节点');
+                    }
+                    break;
+                case val instanceof S.NodeList :
+                    return val.offset().top;
+                    break;
+                default :
+                    break;
+
+            }
+        },
+        _setThreshold : function (val){
+            if (S.isString(val) && S.one(val)) {
+                return S.one('val');
+            }else if(S.isNumber(val)){
+                return val;
+            }
+            return 0;
+        }
+    }, {
         /**
          * 获取指定DOM的region
          * @method region
@@ -186,113 +294,6 @@ KISSY.add(function (S , Node) {
                 height: _b - _t
             }
         },
-        /**
-         * 重新获取每一个navigator的值，在window.scroll时需要根据这个值来监测当前处于最顶端的navigator
-         * 当页面的模块高度发生变化时，建议重新调用此方法
-         * @method setNavigatorsTop
-         * @param navigators
-         */
-        setNavigatorsTop : function (navigators){
-            S.each(navigators , function (navigator){
-                navigator.top = this._getTop(navigator.scrollTo.to) + (navigator.scrollTo.threshold);
-            } , this);
-        },
-        /**
-         * 滚动到指定navigator的位置
-         * @param item
-         */
-        scrollTo    : function (item) {
-            var that = this;
-            $(win).stop();
-            /**
-             * 滚动开始贺结束时改变其状态
-             * @event scrolling
-             * @param {Boolean} scrolling 滚动中
-             * @param {Object} data
-             **/
-            this.fire('scrolling' , {
-                scrolling : true,
-                data : item
-            });
-            var toTop =  this._getTop(item.scrollTo.to) + (item.scrollTo.threshold);
-            item.top = toTop ;
-            $(win).animate({
-                scrollTop: toTop
-            }, this.get('duration') / 1000, this.get('easing'),function (){
-                that.fire('scrolling' , {
-                    scrolling : false,
-                    data : item
-                });
-            });
-        },
-        /**
-         * 分析html结构和配置转换为json
-         * 注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置
-         * @param node
-         * @param selector
-         * @private
-         */
-        _parseHtmlToNavigators : function (node, selector){
-            var navigators = [];
-            node.all(selector).each(function (_item){
-                var customCfg =_item.attr('data-navigator') ;
-                var _navigator = {};
-                var _toNode = S.one(_item.attr('href'));
-                if (_item.hasAttr('data-navigator')) {
-                    customCfg =_item.attr('data-navigator');
-                }else{
-                    customCfg ={};
-                }
-                customCfg = S.JSON.parse(customCfg) || {};
-
-                S.log(customCfg);
-                customCfg = S.mix({threshold:0 , to : 0} , customCfg , undefined, undefined , true);
-                _toNode && (customCfg.to = _toNode);
-                _navigator =  {
-                    srcNode : _item,
-                    scrollTo: customCfg
-                };
-                navigators.push(_navigator);
-                _item.data('navigator' , _navigator);
-            });
-            this.set('navigators', this.get('navigators').concat(navigators));
-        },
-        /**
-         * 获取指定节点的top值，如果传入数字，以此为准
-         * @param val
-         * @returns {*}
-         * @private
-         */
-        _getTop     : function (val) {
-            switch (true) {
-                case S.isNumber(val) :
-                    return val;
-                    break;
-                case S.isString(val) :
-                    var _node = S.one(val);
-                    if (_node) {
-                        return _node.offset().top
-                    } else {
-                        S.log('没有找到对应节点');
-                    }
-                    break;
-                case val instanceof S.NodeList :
-                    return val.offset().top;
-                    break;
-                default :
-                    break;
-
-            }
-        },
-        _setThreshold : function (val){
-            if (S.isString(val) && S.one(val)) {
-                return S.one('val');
-            }else if(S.isNumber(val)){
-                return val;
-            }
-            return 0;
-        }
-    }, {
         ATTRS: /** @lends PageSidebar*/{
             /**
              * 导航容器的根节点
@@ -303,10 +304,7 @@ KISSY.add(function (S , Node) {
             node      : {
                 value: null,
                 setter : function (val){
-                    if (S.isString(val)) {
-                        return S.one(val);
-                    }
-                    return val;
+                    return S.one(val);
                 }
             },
             /**
