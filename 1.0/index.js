@@ -237,6 +237,7 @@ KISSY.add(function (S , Node) {
             node.all(selector).each(function (_item){
                 var customCfg =_item.attr('data-navigator') ;
                 var _navigator = {};
+                var _href = /#[\d\D]*/gi.exec(_item.attr('href'));
                 var _toNode = S.one(_item.attr('href'));
                 if (_item.hasAttr('data-navigator')) {
                     customCfg =_item.attr('data-navigator');

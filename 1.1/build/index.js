@@ -166,7 +166,7 @@ KISSY.add('gallery/pagesidebar/1.1/index',function (S , Node) {
             node.all(selector).each(function (_item){
                 var customCfg ;
                 var _navigator = {};
-                var _href = /#[\d\D]+/gi.exec(_item.attr('href'));
+                var _href = /#[\d\D]*/gi.exec(_item.attr('href'));
                 var _toNode = S.one(_item.attr('href'));
                 if (_item.hasAttr('data-navigator')) {
                     try{
