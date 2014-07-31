@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>1.0/index.js - pagesidebar</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="pagesidebar"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/PageNavigator.html">PageNavigator</a></li>
+            
+                <li><a href="../classes/PageSidebar.html">PageSidebar</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/PageNavigator.html">PageNavigator</a></li>
+            
+                <li><a href="../modules/PageSidebar.html">PageSidebar</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: 1.0/index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * @fileoverview 页面导航组件
+ * @author PageSidebar&lt;shuke.cl@taobao.com&gt;
+ * @module PageSidebar
+ **/
+KISSY.add(function (S , Node) {
+    var EMPTY = &#x27;&#x27;;
+    var $ = Node.all;
+    var win = window;
+    var DOM = S.DOM;
+    var isIE6 = S.UA.ie === 6;
+    /**
+     * 页面导航组件
+     * @class PageSidebar
+     * @constructor
+     * @extends Base
+     */
+    function PageSidebar(comConfig) {
+        var self = this;
+        //调用父类构造函数
+        PageSidebar.superclass.constructor.call(self, comConfig);
+        this.initializer();
+    }
+
+    S.extend(PageSidebar, S.Base, /** @lends PageSidebar.prototype*/{
+        initializer : function () {
+            this.node = this.get(&#x27;node&#x27;);
+            if (!this.node) {
+                S.log(&#x27;初始化失败：没有指定导航条所在节点&#x27;);
+                return;
+            }
+            this._parseHtmlToNavigators(this.node , this.get(&#x27;navItemSelector&#x27;));
+            this.setNavigatorsTop(this.get(&#x27;navigators&#x27;));
+            this.renderUI();
+            this.bindUI();
+        },
+        renderUI    : function () {
+
+        },
+        bindUI      : function () {
+            this.node.delegate(&#x27;click&#x27; , this.get(&#x27;navItemSelector&#x27;) , this._clickNavigatorHandler , this);
+            S.one(win).on(&#x27;scroll&#x27; ,  S.buffer(this._scrollHandler , this.get(&#x27;interval&#x27;) , this));
+            this.on(&#x27;afterActiveNavigatorChange&#x27; , function (e){
+                e.prevVal &amp;&amp; e.prevVal.srcNode.removeClass(&#x27;selected&#x27;);
+                e.newVal.srcNode &amp;&amp; e.newVal.srcNode.addClass(&#x27;selected&#x27;);
+            },this);
+
+            //同步显示状态
+            this.on(&#x27;afterVisibleChange&#x27; , function (e){
+                e.newVal ?  this.node.show() : this.node.hide();
+            },this);
+        },
+        _clickNavigatorHandler : function (e){
+            var that = this;
+            e.preventDefault();
+            var srcNode = S.one(e.currentTarget);
+            this.clickedNavigator = srcNode.data(&#x27;navigator&#x27;);
+            setTimeout(function (){
+                that.clickedNavigator = null;
+            },this.get(&#x27;duration&#x27;) + 200);
+            this.scrollTo(srcNode.data(&#x27;navigator&#x27;));
+        },
+        _scrollHandler : function (){
+            var threshold = this.get(&#x27;threshold&#x27;);
+            if (threshold &gt; 0 ) {
+                this.set(&#x27;visible&#x27; , DOM.scrollTop() &gt; threshold);
+            }else{
+                this.set(&#x27;visible&#x27; , true);
+            }
+            this.get(&#x27;enableAutoSelect&#x27;) &amp;&amp; this._checkRegion();
+
+            isIE6 &amp;&amp; (this.node[0].className = this.node[0].className);
+        },
+        /**
+         * 通过判断Element在视窗可视区域内所占的大小判断哪一个导航点处于高亮.用户点击的导航点权重最高
+         * 通过afterAcitveNavigatorChange可以监听到变化
+         * @private
+         */
+        _checkRegion : function (){
+            var navigators = this.get(&#x27;navigators&#x27;);
+
+            var viewportRegion = this.viewportRegion();
+
+            //this.set(&#x27;acitveNavigator&#x27; , null);
+            var inRegionNavigators = [];
+            var activeNavigator = null;
+            for(var i = 0 ,len  = navigators.length ; i &lt; len; i ++){
+                var toNode = navigators[i].scrollTo.to;
+                if ((toNode instanceof S.NodeList)) {
+                    toNode.data(&#x27;region&#x27; , this.region(toNode));
+                    if (this.inRegion( toNode.data(&#x27;region&#x27;) , viewportRegion)) {
+                        navigators[i].intersectRegion = this.intersect(toNode.data(&#x27;region&#x27;) , viewportRegion);
+                        inRegionNavigators.push(navigators[i]);
+                    }
+                }
+            }
+            if (inRegionNavigators.length &gt; 0) {
+                inRegionNavigators.sort(function (a, b){
+                    return b.intersectRegion.height - a.intersectRegion.height;
+                });
+                activeNavigator = inRegionNavigators[0];
+                if (this.clickedNavigator !== null) {
+                    for(i = 0 , len = inRegionNavigators.length ; i &lt; len ; i++){
+                        if (inRegionNavigators[i] === this.clickedNavigator) {
+                            activeNavigator = this.clickedNavigator;
+                        }
+                    }
+                }
+                this.set(&#x27;activeNavigator&#x27; , activeNavigator);
+            }
+        },
+        /**
+         * 获取指定DOM的region
+         * @method region
+         * @param node
+         * @return Object
+         */
+        region : function (node){
+            var offset = node.offset();
+            var _w = node.outerWidth();
+            var _h = node.outerHeight();
+            return {
+                left: offset.left,
+                top : offset.top,
+                right : offset.left + _w,
+                bottom : offset.top + _h,
+                width : _w,
+                height : _h
+            };
+        },
+        /**
+         * 获取可视区域的region
+         * @method viewportRegion
+         * @return Object
+         */
+        viewportRegion : function (){
+            var _left = DOM.scrollLeft();
+            var _top = DOM.scrollTop();
+            var _w = DOM.viewportWidth();
+            var _h = DOM.viewportHeight();
+            return {
+                left  : _left,
+                top   : _top,
+                right : _left + _w,
+                bottom: _top + _h,
+                width : _w,
+                height: _h
+            };
+        },
+        /**
+         * 检测region1是否包含在region2里
+         * @param region1
+         * @param region2
+         * @param allInRegion {Boolean} 是否要完全包含
+         * @return Boolean
+         */
+        inRegion : function (region1,region2,allInRegion){
+            allInRegion = allInRegion || false;
+            var _h = true;
+            var _v = true;
+            if (allInRegion) {//整个被包含要求region1的最右侧和最下侧均不超过region2的最右侧和最下侧
+                _h = (region1.right &lt;= region2.right &amp;&amp; region1.left &gt;= region2.left);
+                _v = (region1.bottom &lt;= region2.bottom &amp;&amp; region1.top &gt;= region2.top);
+            }
+            var h = ((region1.top &gt;= region2.top &amp;&amp; region1.top &lt;= region2.bottom) || (region1.top &lt;= region2.top &amp;&amp; region1.bottom &gt;= region2.top ))  &amp;&amp; _h;
+            var v = ((region1.left &gt;= region2.left &amp;&amp; region2.left &lt;= region2.right) || (region1.left &lt;= region2.left &amp;&amp; region1.right &gt;= region2.left))  &amp;&amp; _v;
+            return h &amp;&amp; v;
+        },
+        /**
+         * 获取两个region的相交region
+         * @param region1
+         * @param region2
+         * @returns {{left: number, top: number, right: number, bottom: number, width: number, height: number}}
+         */
+        intersect : function (region1,region2){
+            var _l = Math.max(region1.left,region2.left);
+            var _r = Math.min(region1.right , region2.right);
+            var _t = Math.max(region1.top , region2.top);
+            var _b = Math.min(region1.bottom , region2.bottom);
+            return {
+                left  : _l,
+                top   : _t,
+                right : _r,
+                bottom: _b,
+                width : _r - _l,
+                height: _b - _t
+            }
+        },
+        /**
+         * 重新获取每一个navigator的值，在window.scroll时需要根据这个值来监测当前处于最顶端的navigator
+         * 当页面的模块高度发生变化时，建议重新调用此方法
+         * @method setNavigatorsTop
+         * @param navigators
+         */
+        setNavigatorsTop : function (navigators){
+            S.each(navigators , function (navigator){
+                navigator.top = this._getTop(navigator.scrollTo.to) + (navigator.scrollTo.threshold);
+            } , this);
+        },
+        /**
+         * 滚动到指定navigator的位置
+         * @param item
+         */
+        scrollTo    : function (item) {
+            var that = this;
+            $(win).stop();
+            /**
+             * 滚动开始贺结束时改变其状态
+             * @event scrolling
+             * @param {Boolean} scrolling 滚动中
+             * @param {Object} data
+             **/
+            this.fire(&#x27;scrolling&#x27; , {
+                scrolling : true,
+                data : item
+            });
+            var toTop =  this._getTop(item.scrollTo.to) + (item.scrollTo.threshold);
+            item.top = toTop ;
+            $(win).animate({
+                scrollTop: toTop
+            }, this.get(&#x27;duration&#x27;) / 1000, this.get(&#x27;easing&#x27;),function (){
+                that.fire(&#x27;scrolling&#x27; , {
+                    scrolling : false,
+                    data : item
+                });
+            });
+        },
+        /**
+         * 分析html结构和配置转换为json
+         * 注意：优先取a标签的href属性配置的id来通过S.one去取节点,如果没有找到id对应的节点，则data-navigator属性的scrollTo配置
+         * @param node
+         * @param selector
+         * @private
+         */
+        _parseHtmlToNavigators : function (node, selector){
+            var navigators = [];
+            node.all(selector).each(function (_item){
+                var customCfg =_item.attr(&#x27;data-navigator&#x27;) ;
+                var _navigator = {};
+                var _toNode = S.one(_item.attr(&#x27;href&#x27;));
+                customCfg = S.JSON.parse(customCfg) || {};
+
+                S.log(customCfg);
+                customCfg = S.mix({threshold:0 , to : 0} , customCfg , undefined, undefined , true);
+                _toNode &amp;&amp; (customCfg.to = _toNode);
+                _navigator =  {
+                    srcNode : _item,
+                    scrollTo: customCfg
+                };
+                navigators.push(_navigator);
+                _item.data(&#x27;navigator&#x27; , _navigator);
+            });
+            this.set(&#x27;navigators&#x27;, this.get(&#x27;navigators&#x27;).concat(navigators));
+        },
+        /**
+         * 获取指定节点的top值，如果传入数字，以此为准
+         * @param val
+         * @returns {*}
+         * @private
+         */
+        _getTop     : function (val) {
+            switch (true) {
+                case S.isNumber(val) :
+                    return val;
+                    break;
+                case S.isString(val) :
+                    var _node = S.one(val);
+                    if (_node) {
+                        return _node.offset().top
+                    } else {
+                        S.log(&#x27;没有找到对应节点&#x27;);
+                    }
+                    break;
+                case val instanceof S.NodeList :
+                    return val.offset().top;
+                    break;
+                default :
+                    break;
+
+            }
+        },
+        _setThreshold : function (val){
+            if (S.isString(val) &amp;&amp; S.one(val)) {
+                return S.one(&#x27;val&#x27;);
+            }else if(S.isNumber(val)){
+                return val;
+            }
+            return 0;
+        }
+    }, {
+        ATTRS: /** @lends PageSidebar*/{
+            /**
+             * 导航容器的根节点
+             * @attribute node
+             * @type String|NodeList
+             * @default null
+             **/
+            node      : {
+                value: null,
+                setter : function (val){
+                    if (S.isString(val)) {
+                        return S.one(val);
+                    }
+                    return val;
+                }
+            },
+            /**
+             * 导航子节点选择器,必须指定为a标签，推荐href设定为#id的形式，兼容浏览器默认行为
+             * @attribute navItemSelector
+             * @type String
+             * @default .J_Navigator
+             **/
+            navItemSelector : {
+                value : &#x27;.J_PageSidebar&#x27;
+            },
+            /**
+             * 启用逆向流程：用户滚动页面时，自动高亮选中当前页面的第一个模块对应的导航链接
+             * @attribute enableAutoSelect
+             * @type Boolean
+             * @default true
+             **/
+            enableAutoSelect : {
+                value : true
+            },
+            /**
+             * 高亮导航节点样式
+             * @attribute navSelectedClass
+             * @type String
+             * @default &#x27;selected&#x27;
+             **/
+            navSelectedClass :{
+                value : &#x27;selected&#x27;
+            },
+            /**
+             * {
+                 srcNode : null,
+                 scrollTo : {
+                     to : null,
+                     threshold : 0
+                 },
+                 top: 200
+             }
+             */
+            navigators: {
+                value : []
+            },
+            /**
+             * 模块处于可视区域时出发的模块,通过e.newVal.scrollTo.to可以获取到进入显示区域的模块，e.newVal.srcNode表示当前的导航触发节点
+             * @event afterAcitveNavigatorChange
+             * @param {Object} navigator
+             **/
+            activeNavigator : {
+                value : null
+            },
+            /**
+             * 设定一个阀值，DOM.scrollTop()大于这个值时显示导航条
+             * @attribute threshold
+             * @type Number
+             * @default 0
+             **/
+            threshold : {
+                value : 0,
+                setter : &#x27;_setThreshold&#x27;
+            },
+            /**
+             * 导航条显示隐藏时触发
+             * @event afterVisibleChange
+             * @param {Boolean} e.newVal e.prevVal
+             **/
+            visible : {
+                value : true
+            },
+            /**
+             * 页面滚动时的监测的时间间隔，时间越短，性能越差
+             * @attribute interval
+             * @type Number
+             * @default 400
+             **/
+            interval : {
+                value : 400
+            },
+            /**
+             * 滑动的duration,单位：ms 毫秒
+             * @attribute duration
+             * @type Number 毫秒
+             * @default 800
+             **/
+            duration : {
+                value : 800
+            },
+            /**
+             * 滑动的缓冲效果
+             * @attribute easing
+             * @type String
+             * @default easeOut
+             **/
+            easing : {
+                value : &#x27;easeOut&#x27;
+            }
+
+        }
+    });
+    return PageSidebar;
+}, {requires: [&#x27;node&#x27; , &#x27;dom&#x27;, &#x27;base&#x27; , &#x27;anim&#x27; , &#x27;ua&#x27;]});
+
+
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
